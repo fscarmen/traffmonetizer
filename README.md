@@ -6,19 +6,16 @@
 
 # 目录
 
-- [traffmonetizer 介绍[（转述自 Google Play)]](README.md#traffmonetizer-介绍转述自-google-play)
-- [脚本具有以下特点](README.md#脚本具有以下特点)
-- [信息](README.md#信息)
-- [交互式使用方法](README.md#交互式使用方法)
-- [带 Token 安装方法](README.md#带-Token-安装方法)
-- [全部卸载](README.md#全部卸载)
+- [traffmonetizer 介绍（转述自 Google Play)](README.md#traffmonetizer-介绍转述自-google-play)
+- [脚本特点](README.md#脚本特点)
+- [安装和卸载](README.md#)
 - [免责声明](README.md#免责声明)
 
 * * *
 
 ## traffmonetizer 介绍[（转述自 Google Play)](https://play.google.com/store/apps/details?id=com.traffmonetizer.client)
 
-traffmonetizer 是一种允许用户通过分享您的流量来赚钱的选项。
+traffmonetizer 是一种允许用户通过分享您的流量来赚钱的选项。注册链接:https://traffmonetizer.com/?aff=196148
 
 您共享的 1G 流量将获得 0.10 美元，并且此脚本支持数据中心网络或家庭带宽。
 
@@ -28,7 +25,7 @@ traffmonetizer 是一种允许用户通过分享您的流量来赚钱的选项�
 
 仅需几个简单的步骤，您将把互联网变现成金钱
 
-1. 注册我们的服务并在此处获取访问令牌 [https://app.traffmonetizer.com](https://traffmonetizer.com/?aff=196148)
+1. 注册我们的服务并在此处获取访问令牌，走此链接注册将获得5刀的注册奖励。注册链接:https://traffmonetizer.com/?aff=196148
 
 2. 安装应用程序
 
@@ -48,28 +45,21 @@ traffmonetizer 是一种允许用户通过分享您的流量来赚钱的选项�
 4. Skrill
 5. 收款人
 
-## 脚本具有以下特点
+## 脚本特点
 
-1. 根据系统自动安装docker，如果已经安装了docker，则不再安装。
+* 根据架构 AMD64 和 ARM64 自动选择和构建拉取的docker镜像，无需您手动修改官方案例安装。
 
-2. 根据架构自动选择和构建拉取的docker镜像，无需您手动修改官方案例安装。
-    
-3. 使用Watchtower进行镜像自动更新，无需手动更新和重新输入参数。
+* 按照次序自动命名并安装容器, 可以在同一环境下安装多个容器，分别对应多个 token。
 
-(Watchtower 是一款实现自动化更新 Docker 镜像与容器的实用工具.它监控着所有正在运行的容器以及相关镜像,当检测本地镜像与镜像仓库中的镜像有差异时,会自动拉取最新镜像并使用最初部署时的参数重新启动相应的容器.)
+* 使用 Watchtower 自动同步官方最新镜像，无需手动更新和重新输入参数。(Watchtower 是一款实现自动化更新 Docker 镜像与容器的实用工具.它监控着所有正在运行的容器以及相关镜像,当检测本地镜像与镜像仓库中的镜像有差异时,会自动拉取最新镜像并使用最初部署时的参数重新启动相应的容器.)
 
-### 信息
+## 安装和卸载
 
-- 本项目已经在 AMD64 和 ARM 上验证上测试通过
-- 感兴趣可以尝试一下，[注册链接](https://traffmonetizer.com/?aff=196148), 走我链接注册你获得5刀的注册奖励。
-
-
-### 交互式使用方法
+### 交互式使用方法---注册链接注册后，复制左上角的token，运行脚本，粘贴token，回车，即可开始安装。
 
 ```shell
 bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/traffmonetizer/main/tm.sh)
 ```
-注册链接注册后，复制左上角的token，运行脚本，粘贴token，回车，即可开始安装。
 
 ### 带 Token 安装方法
 
