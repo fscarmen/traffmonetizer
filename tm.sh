@@ -86,6 +86,11 @@ container_build(){
   docker run -d --name $CONTAIN_NAME traffmonetizer/cli:$ARCH start accept --token "$TMTOKEN"
 }
 
+# 安装 watchtower ，以实时同步官方最新镜像
+towerwatch_build(){
+  [[ ! $(docker ps -a) =~ 'watchtower' ]] && green " Install Watchtower " && docker run -d --name watchtower --restart always  -p 2095:8080 -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --cleanup
+}
+
 # 卸载
 uninstall(){
   docker rm -f $(docker ps -a | grep -E "$NAME_1" | awk '{print $1}')
@@ -109,3 +114,4 @@ check_ipv4
 check_virt
 check_exist
 container_build
+towerwatch_build
