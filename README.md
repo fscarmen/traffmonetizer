@@ -15,7 +15,7 @@
 
 ## traffmonetizer 介绍[（转述自 Google Play)](https://play.google.com/store/apps/details?id=com.traffmonetizer.client)
 
-traffmonetizer 是一种允许用户通过分享您的流量来赚钱的选项。注册链接:https://traffmonetizer.com/?aff=196148
+traffmonetizer 是一种允许用户通过分享您的流量来赚钱的选项。注册链接: https://traffmonetizer.com/?aff=196148
 
 您共享的 1G 流量将获得 0.10 美元，并且此脚本支持数据中心网络或家庭带宽。
 
@@ -25,7 +25,7 @@ traffmonetizer 是一种允许用户通过分享您的流量来赚钱的选项�
 
 仅需几个简单的步骤，您将把互联网变现成金钱
 
-1. 注册我们的服务并在此处获取访问令牌，走此链接注册将获得5刀的注册奖励。注册链接:https://traffmonetizer.com/?aff=196148
+1. 注册我们的服务并在此处获取访问令牌，走此链接注册将获得5刀的注册奖励。注册链接: https://traffmonetizer.com/?aff=196148
 
 2. 安装应用程序
 
