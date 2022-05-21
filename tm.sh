@@ -72,23 +72,29 @@ check_exist(){
 
 container_build(){
   # 宿主机安装 docker
-  green "\n Install docker"
-  if [ $SYSTEM = "CentOS" ]; then
-    ${PACKAGE_INSTALL[int]} yum-utils
-    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-    ! systemctl is-active docker >/dev/null 2>&1 && echo -e " \n Install docker \n " && ${PACKAGE_INSTALL[int]} docker-ce docker-ce-cli containerd.io
-    systemctl enable --now docker
-  else
-    ! systemctl is-active docker >/dev/null 2>&1 && echo -e " \n Install docker \n " && ${PACKAGE_INSTALL[int]} docker.io
+  if ! systemctl is-active docker >/dev/null 2>&1; then
+  yellow "\n Install docker"
+    if [ $SYSTEM = "CentOS" ]; then
+      ${PACKAGE_INSTALL[int]} yum-utils
+      yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      ${PACKAGE_INSTALL[int]} docker-ce docker-ce-cli containerd.io
+      systemctl enable --now docker
+    else
+      ${PACKAGE_INSTALL[int]} docker.io
+    fi
   fi
-
   # 创建容器
-  docker run -d --name $CONTAIN_NAME traffmonetizer/cli:$ARCH start accept --token "$TMTOKEN"
+  yellow "\n Create the traffmonetizer container.\n " && docker run -d --name $CONTAIN_NAME traffmonetizer/cli:$ARCH start accept --token "$TMTOKEN" >/dev/null 2>&1
 }
 
 # 安装 watchtower ，以实时同步官方最新镜像
 towerwatch_build(){
-  [[ ! $(docker ps -a) =~ 'watchtower' ]] && green " Install Watchtower " && docker run -d --name watchtower --restart always  -p 2095:8080 -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --cleanup
+  [[ ! $(docker ps -a) =~ 'watchtower' ]] && yellow " Install Watchtower.\n " && docker run -d --name watchtower --restart always  -p 2095:8080 -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --cleanup >/dev/null 2>&1
+}
+
+# 显示结果
+result(){
+  docker ps -a | grep -q "$NAME" && docker ps -a | grep -q "watchtower" && green " Install success.\n" || red " install fail.\n"
 }
 
 # 卸载
@@ -115,3 +121,5 @@ check_virt
 check_exist
 container_build
 towerwatch_build
+result
+
