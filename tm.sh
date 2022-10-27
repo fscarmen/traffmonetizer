@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 定义容器名前缀
-NAME_1='tm_'
+NAME='tm_'
 
 # 自定义字体彩色，read 函数，安装依赖函数
 red(){ echo -e "\033[31m\033[01m$1$2\033[0m"; }
@@ -55,16 +55,18 @@ check_virt(){
 
 # 寻找已有的容器名中编号的最大值，从该值的下一个开始建
 check_exist(){
-  NUM_ALL=$(docker ps -a | awk '{print $NF}' | grep -E "$NAME_1" | sed "s/[^0-9]*//")
-  j=1
-  while true; do
-  k="\$$j"
-  NUM_NOW=$(echo $NUM_ALL | awk "{print $k}")
-  [[ $NUM_MAX -lt $NUM_NOW ]] && NUM_MAX="$NUM_NOW"
-  [ -z $NUM_NOW ] && break
-  (( j++ )) || true
-  done
-  CONTAIN_NAME=$NAME_1$(( NUM_MAX + 1 ))
+  if [ $(type -p docker) ]; then
+    NUM_ALL=$(docker ps -a | awk '{print $NF}' | grep -E "$NAME" | sed "s/[^0-9]*//")
+    j=1
+    while true; do
+      k="\$$j"
+      NUM_NOW=$(echo $NUM_ALL | awk "{print $k}")
+      [[ $NUM_MAX -lt $NUM_NOW ]] && NUM_MAX="$NUM_NOW"
+      [ -z $NUM_NOW ] && break
+      (( j++ )) || true
+    done
+  fi
+  CONTAIN_NAME=$NAME$(( NUM_MAX + 1 ))
   
   # 输入 traffmonetizer 的个人 token
   [ -z $TMTOKEN ] && reading " Enter your token, something end with =, if you do not find it, open https://traffmonetizer.com/?aff=196148: " TMTOKEN
@@ -99,7 +101,7 @@ result(){
 
 # 卸载
 uninstall(){
-  docker rm -f $(docker ps -a | grep -E "$NAME_1" | awk '{print $1}')
+  docker rm -f $(docker ps -a | grep -E "$NAME" | awk '{print $1}')
   docker rmi -f $(docker images | grep traffmonetizer/cli | awk '{print $3}')
   green "\n Uninstall containers and images complete.\n"
   exit 0
